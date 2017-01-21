@@ -15,6 +15,8 @@ public class SpeakerController : MonoBehaviour {
 
 	public ParticleSystem jetpack;
 
+	private bool dead = false;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
@@ -26,20 +28,29 @@ public class SpeakerController : MonoBehaviour {
 		
 	}
 
-	void FixedUpdate() {
-		bool jetpackActive = Input.GetKey("space");
-		if (jetpackActive) {
+	void FixedUpdate () 
+	{
+		bool jetpackActive = Input.GetButton("Fire1");
+
+		jetpackActive = jetpackActive && !dead;
+
+		if (jetpackActive)
+		{
 			rigidbody2D.AddForce(new Vector2(0, jetpackForce));
 		}
 
-		Vector2 newVelocity = rigidbody2D.velocity;
-		newVelocity.x = forwardMovementSpeed;
-		rigidbody2D.velocity = newVelocity;
+		if (!dead)
+		{
+			Vector2 newVelocity = rigidbody2D.velocity;
+			newVelocity.x = forwardMovementSpeed;
+			rigidbody2D.velocity = newVelocity;
+		}
 
-		UpdateGroundedStatus ();
+		UpdateGroundedStatus();
+
 		AdjustJetpack(jetpackActive);
-			
 	}
+
 	void UpdateGroundedStatus()
 	{
 		grounded = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, groundCheckLayerMask);
@@ -52,4 +63,13 @@ public class SpeakerController : MonoBehaviour {
 		jetpack.emissionRate = jetpackActive ? 300.0f : 75.0f; 
 	}
 		
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		HitByLaser(collider);
+	}
+
+	void HitByLaser(Collider2D laserCollider)
+	{
+		dead = true;
+	}
 }
