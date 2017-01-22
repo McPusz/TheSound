@@ -10,10 +10,10 @@ public class GameOverScript : MonoBehaviour {
 		score = PlayerPrefs.GetInt ("Score");
 	}
 	
-	void OnGUI(){
-		GUI.Label (new Rect (Screen.width / 2 - 40, 50, 80, 30), "GAME OVER");
-		GUI.Label (new Rect (Screen.width / 2 - 40, 300, 80, 30), "Score: " + score);
-	}
+//	void OnGUI(){
+//		GUI.Label (new Rect (Screen.width / 2 - 40, 50, 80, 30), "GAME OVER");
+//		GUI.Label (new Rect (Screen.width / 2 - 40, 300, 80, 30), "Score: " + score);
+//	}
 
 	void Update(){
 
