@@ -18,6 +18,8 @@ public class SpeakerController : MonoBehaviour {
 	private bool dead = false;
 	private uint coins = 0;
 
+	public Texture2D coinIconTexture;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
@@ -29,9 +31,15 @@ public class SpeakerController : MonoBehaviour {
 		
 	}
 
+	void OnGUI()
+	{
+		DisplayCoinsCount();
+		DisplayRestartButton();
+	}
+
 	void FixedUpdate () 
 	{
-		bool jetpackActive = Input.GetButton("Fire1");
+		bool jetpackActive = Input.GetKey("space");
 
 		jetpackActive = jetpackActive && !dead;
 
@@ -82,5 +90,31 @@ public class SpeakerController : MonoBehaviour {
 		coins++;
 
 		Destroy(coinCollider.gameObject);
+	}
+
+	void DisplayCoinsCount()
+	{
+		Rect coinIconRect = new Rect(10, 10, 32, 32);
+		GUI.DrawTexture(coinIconRect, coinIconTexture);                         
+
+		GUIStyle style = new GUIStyle();
+		style.fontSize = 30;
+		style.fontStyle = FontStyle.Bold;
+		style.normal.textColor = Color.yellow;
+
+		Rect labelRect = new Rect(coinIconRect.xMax, coinIconRect.y, 60, 32);
+		GUI.Label(labelRect, coins.ToString(), style);
+	}
+
+	void DisplayRestartButton()
+	{
+		if (dead && grounded)
+		{
+			Rect buttonRect = new Rect(Screen.width * 0.35f, Screen.height * 0.45f, Screen.width * 0.30f, Screen.height * 0.1f);
+			if (GUI.Button(buttonRect, "Tap to restart!"))
+			{
+				Application.LoadLevel (Application.loadedLevelName);
+			};
+		}
 	}
 }
