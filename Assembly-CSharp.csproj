@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CreateParticleSortingLayerFix.cs" />
+     <Compile Include="Assets\Scripts\GameOverScript.cs" />
      <Compile Include="Assets\Scripts\GeneratorScript.cs" />
      <Compile Include="Assets\Scripts\LaserScript.cs" />
      <Compile Include="Assets\Scripts\SpeakerController.cs" />

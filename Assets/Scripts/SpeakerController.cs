@@ -101,22 +101,27 @@ public class SpeakerController : MonoBehaviour {
 		GUIStyle style = new GUIStyle();
 		style.fontSize = 60;
 		style.fontStyle = FontStyle.Bold;
-		style.normal.textColor = Color.yellow;
+		style.normal.textColor = Color.red;
+	
 
 		Rect labelRect = new Rect(coinIconRect.xMax, coinIconRect.y, 60, 32);
 		GUI.Label(labelRect, coins.ToString(), style);
+	
 	}
 
 	void DisplayRestartButton()
 	{
 		if (dead && grounded)
 		{
-			Rect buttonRect = new Rect(Screen.width * 0.35f, Screen.height * 0.45f, Screen.width * 0.30f, Screen.height * 0.1f);
-			restartButton = new GUIStyle();
-			if (GUI.Button(buttonRect, "Tap to restart!"))
-			{
-				Application.LoadLevel (Application.loadedLevelName);
-			};
+//			Rect buttonRect = new Rect(Screen.width * 0.35f, Screen.height * 0.45f, Screen.width * 0.30f, Screen.height * 0.1f);
+//			restartButton = new GUIStyle();
+//			if (GUI.Button(buttonRect, "Tap to restart!"))
+//			{
+//				Application.LoadLevel (Application.loadedLevelName);
+//			};
+			PlayerPrefs.SetInt("Score", (int)coins);
+
+			Application.LoadLevel(1);
 		}
 	}
 }
