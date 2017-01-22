@@ -18,8 +18,6 @@ public class SpeakerController : MonoBehaviour {
 	private bool dead = false;
 	private uint coins = 0;
 
-	public Texture2D coinIconTexture;
-
 	// Use this for initialization
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
@@ -74,8 +72,10 @@ public class SpeakerController : MonoBehaviour {
 		
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.gameObject.CompareTag("Coins"))
-			CollectCoin(collider);
+		if (collider.gameObject.CompareTag ("Coins"))
+			CollectCoin (collider);
+		else if (collider.gameObject.CompareTag ("Obudowa"))
+			HitByLaser (collider);
 		else
 			HitByLaser(collider);
 	}
@@ -95,10 +95,9 @@ public class SpeakerController : MonoBehaviour {
 	void DisplayCoinsCount()
 	{
 		Rect coinIconRect = new Rect(10, 10, 32, 32);
-		GUI.DrawTexture(coinIconRect, coinIconTexture);                         
 
 		GUIStyle style = new GUIStyle();
-		style.fontSize = 30;
+		style.fontSize = 60;
 		style.fontStyle = FontStyle.Bold;
 		style.normal.textColor = Color.yellow;
 
