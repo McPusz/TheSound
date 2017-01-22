@@ -15,6 +15,7 @@ public class SpeakerController : MonoBehaviour {
 
 	public ParticleSystem jetpack;
 
+	public GUIStyle restartButton;
 	private bool dead = false;
 	private uint coins = 0;
 
@@ -83,6 +84,7 @@ public class SpeakerController : MonoBehaviour {
 	void HitByLaser(Collider2D laserCollider)
 	{
 		dead = true;
+		animator.SetBool("dead", true);
 	}
 
 	void CollectCoin(Collider2D coinCollider)
@@ -110,6 +112,7 @@ public class SpeakerController : MonoBehaviour {
 		if (dead && grounded)
 		{
 			Rect buttonRect = new Rect(Screen.width * 0.35f, Screen.height * 0.45f, Screen.width * 0.30f, Screen.height * 0.1f);
+			restartButton = new GUIStyle();
 			if (GUI.Button(buttonRect, "Tap to restart!"))
 			{
 				Application.LoadLevel (Application.loadedLevelName);
